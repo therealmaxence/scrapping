@@ -65,13 +65,13 @@ def load_ics_events(start_date=None, end_date=None):
 
         events.append({
             "id": ev.uid,
-            "title": ev.name,
+            "title": get_readable_name(ev.name),
             "start": ev_start.isoformat(),
             "end": ev_end.isoformat(),
             "location": ev.location,
             "description": ev.description,
             "source": "ics",
-            "backgroundColor": "#3b82f6"  # blue
+            "backgroundColor": get_color(ev.name)
         })
 
     return events
@@ -136,3 +136,27 @@ def get_all_events(start_date=None, end_date=None):
 def parse_date(date_str):
     """Convert a date string to datetime, or None."""
     return parser.parse(date_str) if date_str else None
+
+
+# ---------------------------------------------------------
+# Name color rules
+# ---------------------------------------------------------
+
+COLOR_RULES = [
+    ("CM", "#ef4444"),
+    ("TD", "#2f8348"),
+    ("TP", "#dcda53"),
+    ("EX", "#3b82f6"),
+    ("Proj", "#533f86")
+]
+
+def get_readable_name(name: str) -> str:
+    """Return a more readable name by removing keywords."""
+    readable_name = name.replace("_"," ").split()
+    return readable_name[0]
+
+def get_color(name: str) -> str:
+    for keyword, color in COLOR_RULES:
+        if keyword in name:
+            return color
+    return "#6b7280"  # default gray
