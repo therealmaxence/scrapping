@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Set Calendar</title>
+</head>
+<body style="font-family: sans-serif; margin: 40px;">
+    <h2>📅 Paste your calendar link (ICS)</h2>
+    <form method="POST" action="/set_calendar">
+        <label for="calendar_url">ICS calendar URL:</label><br><br>
+        <input type="url" id="calendar_url" name="calendar_url" placeholder="https://..." required style="width: 500px; padding: 8px;">
+        <br><br>
+        <button type="submit" style="padding: 8px 16px;">Save</button>
+    </form>
+</body>
+</html>

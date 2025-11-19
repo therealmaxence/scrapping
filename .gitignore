@@ -1,0 +1,5 @@
+local_events.json
+.env
+__pycache__/
+cache/
+venv/

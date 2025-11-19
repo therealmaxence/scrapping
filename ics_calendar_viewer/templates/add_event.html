@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Event</title>
+    <style>
+        :root {
+            --bg: #f4f4f7;
+            --fg: #222;
+            --card: #fff;
+            --accent: #007bff;
+        }
+
+        [data-theme="dark"] {
+            --bg: #1e1e1e;
+            --fg: #eaeaea;
+            --card: #2a2a2a;
+            --accent: #4da3ff;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: Arial, sans-serif;
+            display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            height: 100vh;
+            background: var(--card);
+            border-right: 1px solid #4443;
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: var(--fg);
+            font-size: 18px;
+        }
+
+        /* Main */
+        .main {
+            margin-left: 260px;
+            padding: 40px;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .card {
+            background: var(--card);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #8885;
+            background: var(--bg);
+            color: var(--fg);
+            margin-bottom: 15px;
+        }
+
+        button {
+            background: var(--accent);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Search bar */
+        .searchbox input {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #6665;
+            width: 100%;
+        }
+
+        /* Dark mode toggle */
+        .theme-toggle {
+            cursor: pointer;
+            background: var(--accent);
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    <div class="sidebar">
+        <a href="/">← Back to calendar</a>
+
+        <div class="searchbox">
+            <input type="text" placeholder="Search events..." />
+        </div>
+
+        <div class="theme-toggle" onclick="toggleTheme()">Toggle Dark Mode</div>
+    </div>
+
+    <div class="main">
+        <h1>Add Event</h1>
+
+        <form method="POST" class="card">
+            <label>Title</label>
+            <input type="text" name="title" required />
+
+            <label>Start time</label>
+            <input type="datetime-local" name="start" required />
+
+            <label>End time</label>
+            <input type="datetime-local" name="end" required />
+
+            <label>Description</label>
+            <textarea name="description" rows="3"></textarea>
+
+            <button type="submit">Save Event</button>
+        </form>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute("data-theme");
+            body.setAttribute("data-theme", current === "light" ? "dark" : "light");
+        }
+    </script>
+
+</body>
+</html>
